@@ -27,6 +27,29 @@ REST API на **Java 21 + Spring Boot 4.1 + PostgreSQL**. Книги, читат
 
 Без `DB_USER`, `DB_PASSWORD` и `JWT_SECRET` приложение намеренно не запустится.
 
+## Публикация в GitHub
+
+1. Создайте пустой репозиторий в своём GitHub-профиле. Для первой публикации безопаснее выбрать **Private**; публичный доступ можно включить после проверки содержимого.
+2. В PowerShell из папки проекта проверьте, что локальные секреты не попадут в Git, затем добавьте изменения и создайте коммит:
+
+   ```powershell
+   git status --short
+   git check-ignore .env
+   git add .
+   git commit -m "Prepare library management project"
+   ```
+
+   Если `git check-ignore .env` не выводит путь, не создавайте и не добавляйте `.env`; проверьте `.gitignore`. Не публикуйте пароли, JWT-ключи, дампы базы данных или реальные учётные данные.
+3. Подставьте URL созданного репозитория вместо `<URL-репозитория>`:
+
+   ```powershell
+   git remote add origin <URL-репозитория>
+   git push -u origin main
+   ```
+
+   Если remote `origin` уже настроен, проверьте его командой `git remote -v` и при необходимости используйте URL нового репозитория командой `git remote set-url origin <URL-репозитория>`.
+4. В GitHub откройте вкладку **Actions** и проверьте workflow **Java CI**. Он собирает приложение, запускает тесты и Dependency-Check. Для надёжной работы сканера добавьте секрет `NVD_API_KEY` в **Settings → Secrets and variables → Actions**; без него NVD может ограничивать частоту запросов.
+
 ## Postman
 Импортируйте `postman/library-api.postman_collection.json`, в переменных коллекции задайте `adminUser` / `adminPassword`
 (те же, что `ADMIN_USERNAME` / `ADMIN_PASSWORD`), запустите «Login» — токен сохранится автоматически.
