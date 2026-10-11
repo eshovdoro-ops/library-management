@@ -1,6 +1,6 @@
 # Система управления библиотекой
 
-REST API на **Java 21 + Spring Boot 3.5 + PostgreSQL**. Книги, читатели, выдача и возврат, поиск, задолженности.
+REST API на **Java 21 + Spring Boot 4.1 + PostgreSQL**. Книги, читатели, выдача и возврат, поиск, задолженности.
 Авторизация — JWT, роли `ADMIN` и `LIBRARIAN`.
 
 ## Возможности
@@ -23,7 +23,7 @@ REST API на **Java 21 + Spring Boot 3.5 + PostgreSQL**. Книги, читат
    - Linux/macOS: `set -a; source .env; set +a; mvn spring-boot:run`
    - Windows PowerShell: задайте `$env:DB_USER="..."` и т. д., затем `mvn spring-boot:run`
    - IntelliJ IDEA: Run → Edit Configurations → Environment variables.
-4. Тесты: `mvn test` (не требуют БД).
+4. Тесты: `mvn test` (не требуют БД). В GitHub Actions выполняются `mvn verify` и проверка уязвимостей зависимостей; Dependabot проверяет Maven-зависимости и GitHub Actions.
 
 Без `DB_USER`, `DB_PASSWORD` и `JWT_SECRET` приложение намеренно не запустится.
 

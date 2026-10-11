@@ -1,0 +1,30 @@
+name: Java CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Set up Java 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+      - name: Build, test, and scan dependencies
+        run: >-
+          mvn --batch-mode --no-transfer-progress
+          verify org.owasp:dependency-check-maven:13.0.0:check
+        env:
+          NVD_API_KEY: ${{ secrets.NVD_API_KEY }}
