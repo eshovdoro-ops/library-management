@@ -1,0 +1,28 @@
+# Секреты — никогда не коммитим
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.jks
+application-local.yml
+application-local.properties
+secrets/
+
+# Сборка
+target/
+*.jar
+*.class
+
+# IDE / ОС
+.idea/
+*.iml
+.vscode/
+.DS_Store
+Thumbs.db
+
+# Логи и дампы
+*.log
+*.dump
+*.sql.gz

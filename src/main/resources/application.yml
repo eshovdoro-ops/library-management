@@ -1,0 +1,40 @@
+# Секреты НЕ хранятся в репозитории: всё берётся из переменных окружения.
+# Значений по умолчанию для паролей и ключей нет намеренно — приложение не запустится без них.
+spring:
+  application:
+    name: library-management
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/library}
+    username: ${DB_USER}
+    password: ${DB_PASSWORD}
+  jpa:
+    open-in-view: false
+    show-sql: false
+    hibernate:
+      ddl-auto: validate      # схему создаёт только Flyway
+  flyway:
+    enabled: true
+  data:
+    web:
+      pageable:
+        max-page-size: 100
+        default-page-size: 20
+
+server:
+  port: 8080
+  error:
+    include-message: never
+    include-stacktrace: never
+    include-binding-errors: never
+
+app:
+  jwt:
+    secret: ${JWT_SECRET}                 # минимум 32 символа
+    expiration-minutes: ${JWT_EXP_MIN:60}
+  loan:
+    days: 14            # срок выдачи
+    max-active: 5       # максимум книг на руках у читателя
+    fine-per-day: 0.50  # штраф за день просрочки
+  admin:
+    username: ${ADMIN_USERNAME:}          # первичный администратор (создаётся, если задан)
+    password: ${ADMIN_PASSWORD:}
